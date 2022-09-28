@@ -1,4 +1,4 @@
-import { useContext, Fragment } from "react";
+import { useContext } from "react";
 import { MonstersContext } from "./contexts/monsters.context";
 
 import CardList from "./components/card-list/card-list.component";
