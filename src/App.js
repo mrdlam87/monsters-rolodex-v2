@@ -24,7 +24,6 @@ const App = () => {
         placeholder="search monsters"
       />
       <CardList monsters={filteredMonsters} />
-
       {favouriteMonsters.length > 0 && (
         <>
           <h2 className="app-sub-title">Favourite Monsters</h2>

@@ -35,11 +35,11 @@ export const MonstersProvider = ({ children }) => {
     );
 
     setFilteredMonsters(newFilteredMonsters);
+    setFavouriteMonsters(getFavourites(monsters));
   }, [monsters, searchField]);
 
   const toggleFavouriteMonster = (faveMonster) => {
     setMonsters(toggleFavourite(faveMonster, monsters));
-    setFavouriteMonsters(getFavourites(monsters));
   };
 
   const value = {
