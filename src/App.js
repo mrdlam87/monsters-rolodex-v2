@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setSearchField(""));
-    !monsters &&
+    monsters.length === 0 &&
       fetch("https://jsonplaceholder.typicode.com/users")
         .then((response) => response.json())
         .then((users) => dispatch(setMonsters(users)));
