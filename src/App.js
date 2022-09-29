@@ -1,18 +1,30 @@
-import { useContext } from "react";
-import { MonstersContext } from "./contexts/monsters.context";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
+import { setMonsters, setSearchField } from "./store/monsters.slice";
+import {
+  selectFavouriteMonsters,
+  selectFilteredMonsters,
+} from "./store/monsters.selector";
 
 const App = () => {
-  const { filteredMonsters, favouriteMonsters, setSearchField } =
-    useContext(MonstersContext);
+  const dispatch = useDispatch();
+  const filteredMonsters = useSelector(selectFilteredMonsters);
+  const favouriteMonsters = useSelector(selectFavouriteMonsters);
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
-    setSearchField(searchFieldString);
+    dispatch(setSearchField(searchFieldString));
   };
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => dispatch(setMonsters(users)));
+  }, []);
 
   return (
     <div className="App">
