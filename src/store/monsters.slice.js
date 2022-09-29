@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 };
 
 const monstersSlice = createSlice({
-  name: "monsters",
+  name: "monstersSlice",
   initialState: INITIAL_STATE,
   reducers: {
     setMonsters(state, action) {

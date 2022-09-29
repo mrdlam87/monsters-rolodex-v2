@@ -1,9 +1,9 @@
-export const selectMonsters = (state) => state.monsters.monsters;
+export const selectMonsters = (state) => state.monstersSlice.monsters;
 
 export const selectFilteredMonsters = (state) =>
-  state.monsters.monsters.filter((monster) =>
-    monster.name.toLowerCase().includes(state.monsters.searchField)
+  state.monstersSlice.monsters.filter((monster) =>
+    monster.name.toLowerCase().includes(state.monstersSlice.searchField)
   );
 
 export const selectFavouriteMonsters = (state) =>
-  state.monsters.monsters.filter((monster) => monster.isFave);
+  state.monstersSlice.monsters.filter((monster) => monster.isFave);
