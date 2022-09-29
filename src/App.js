@@ -8,10 +8,12 @@ import { setMonsters, setSearchField } from "./store/monsters.slice";
 import {
   selectFavouriteMonsters,
   selectFilteredMonsters,
+  selectMonsters,
 } from "./store/monsters.selector";
 
 const App = () => {
   const dispatch = useDispatch();
+  const monsters = useSelector(selectMonsters);
   const filteredMonsters = useSelector(selectFilteredMonsters);
   const favouriteMonsters = useSelector(selectFavouriteMonsters);
 
@@ -21,9 +23,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => dispatch(setMonsters(users)));
+    dispatch(setSearchField(""));
+    !monsters &&
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((users) => dispatch(setMonsters(users)));
   }, []);
 
   return (
