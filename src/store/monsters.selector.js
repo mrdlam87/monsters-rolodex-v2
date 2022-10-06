@@ -6,4 +6,9 @@ export const selectFilteredMonsters = (state) =>
   );
 
 export const selectFavouriteMonsters = (state) =>
-  state.monstersSlice.monsters.filter((monster) => monster.isFave);
+  state.monstersSlice.monsters.filter((monster) =>
+    state.monstersSlice.favouriteMonsterIds.includes(monster.id)
+  );
+
+export const selectFavouriteMonsterIds = (state) =>
+  state.monstersSlice.favouriteMonsterIds;

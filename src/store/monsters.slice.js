@@ -1,14 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toggleFavourite = (faveMonster, monsters) => {
-  const updatedMonster = { ...faveMonster, isFave: !faveMonster.isFave };
-  const updatedMonsters = [...monsters];
-  updatedMonsters.splice(monsters.indexOf(faveMonster), 1, updatedMonster);
-  return [...updatedMonsters];
-};
-
 const INITIAL_STATE = {
   monsters: [],
+  favouriteMonsterIds: [],
   searchField: "",
 };
 
@@ -23,12 +17,32 @@ const monstersSlice = createSlice({
     setSearchField(state, action) {
       state.searchField = action.payload;
     },
+    addFavourite(state, action) {
+      state.favouriteMonsterIds = [
+        ...state.favouriteMonsterIds,
+        action.payload.id,
+      ];
+    },
+    removeFavourite(state, action) {
+      state.favouriteMonsterIds = state.favouriteMonsterIds.filter(
+        (id) => id !== action.payload.id
+      );
+    },
+    toggleFavourite(state, action) {
+      const isFave = state.favouriteMonsterIds.includes(action.payload.id);
+      state.favouriteMonsterIds = isFave
+        ? state.favouriteMonsterIds.filter((id) => id !== action.payload.id)
+        : [...state.favouriteMonsterIds, action.payload.id];
+    },
   },
 });
 
-export const { setMonsters, setSearchField } = monstersSlice.actions;
-
-export const toggleFavouriteMonster = (faveMonster, monsters) =>
-  setMonsters(toggleFavourite(faveMonster, monsters));
+export const {
+  setMonsters,
+  setSearchField,
+  addFavourite,
+  removeFavourite,
+  toggleFavourite,
+} = monstersSlice.actions;
 
 export default monstersSlice.reducer;
