@@ -5,7 +5,7 @@ import monstersReducer from "./monsters.slice";
 import { loggerMiddleware } from "./logger";
 
 const persistConfig = {
-  key: "root",
+  key: "rootMonsters",
   storage,
 };
 
