@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavouriteMonster } from "../../store/monsters.slice";
-import { selectMonsters } from "../../store/monsters.selector";
+import { toggleFavourite } from "../../store/monsters.slice";
+import { selectFavouriteMonsterIds } from "../../store/monsters.selector";
 import FaveButton from "../fave-button/fave-button.component";
 import "./card.styles.css";
 
 const Card = ({ monster }) => {
   const dispatch = useDispatch();
-  const monsters = useSelector(selectMonsters);
-  const { id, name, email, isFave } = monster;
+  const favouriteMonsterIds = useSelector(selectFavouriteMonsterIds);
+  const { id, name, email } = monster;
+  const isFave = favouriteMonsterIds.includes(id);
 
-  const clickHandler = () => {
-    dispatch(toggleFavouriteMonster(monster, monsters));
-  };
+  const clickHandler = () => dispatch(toggleFavourite(monster));
 
   return (
     <div className="card-container">
